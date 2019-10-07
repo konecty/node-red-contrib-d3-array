@@ -1,0 +1,20 @@
+{
+	"name": "node-red-contrib-d3-array",
+	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Konecty/node-red-contrib-d3-array"
+	},
+	"description": "Array manipulation, ordering, searching, summarizing, etc using d3-array for node-red",
+	"license": "MIT",
+	"keywords": [],
+	"author": "Konecty Business Platform <dev@konecty.com>",
+	"node-red": {
+		"nodes": {
+			"d3-array": "d3-array.js"
+		}
+	},
+	"dependencies": {
+		"d3-array": "^2.3.2"
+	}
+}

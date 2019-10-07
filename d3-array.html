@@ -1,0 +1,84 @@
+<script type="text/x-red" data-template-name="d3-array">
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+		<input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-property"><i class="fa fa-ellipsis-h"></i> <span data-i18n="d3-array.label.property"></span></label>
+		<input type="text" id="node-input-property" style="width: 70%"/>
+	</div>
+	<div class="form-row">
+		<label for="node-input-function"><i class="fa fa-random"></i> <span data-i18n="d3-array.label.function"></span></label>
+		<select id="node-input-function" style="width:70%;">
+				<option value="group" data-i18n="d3-array.function.group"></option>
+		</select>
+	</div>
+	<div class="form-row node-input-accessors-container-row">
+		<label style="width:100%;" for="node-input-accessors-container"><i class="fa fa-cogs"></i> <span data-i18n="d3-array.label.accessors"></span></label>
+		<ol id="node-input-accessors-container"></ol>
+		<input type="hidden" id="node-input-accessors"/>
+	</div>
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('d3-array', {
+		category: 'sequence',
+		color: '#E2D96E',
+		defaults: {
+			name: { value: '' },
+			property: { value: 'payload', required: true, validate: RED.validators.typedInput('propertyType') },
+			propertyType: { value: 'msg' },
+			function: { value: '', required: true },
+			accessors: { value: '[{ "fn": "" }]' }
+		},
+		inputs: 1,
+		outputs: 1,
+		icon: 'function.svg',
+		label: function() {
+			return this.name || this._('d3-array.label.title');
+		},
+		labelStyle: function() {
+			return this.name ? 'node_label_italic' : '';
+		},
+		oneditprepare: function() {
+			var node = this;
+			$('#node-input-property').typedInput({
+				default: this.propertyType || 'msg',
+				types: ['msg', 'flow', 'global', 'jsonata', 'env']
+			});
+			$('#node-input-accessors-container')
+				.css('min-height', '250px')
+				.css('min-width', '450px')
+				.editableList({
+					addItem: function(container, i, opt) {
+						$('<input/>', { class: 'node-input-accessor-value', type: 'text', style: 'width: 100%;margin-left: 5px;' })
+							.appendTo(container)
+							.typedInput({ default: 'jsonata', types: ['jsonata'] });
+						if (opt != null && opt.fn != null) {
+							$('.node-input-accessor-value', container).typedInput('value', opt.fn);
+						}
+					},
+					removeItem: function(opt) {},
+					sortItems: function(accessors) {},
+					sortable: true,
+					removable: true
+				});
+			const accessors = JSON.parse(this.accessors);
+			for (var i = 0; i < accessors.length; i++) {
+				var accessor = accessors[i];
+				$('#node-input-accessors-container').editableList('addItem', accessor);
+			}
+		},
+		oneditsave: function() {
+			var accessors = $('#node-input-accessors-container').editableList('items');
+			var node = this;
+			var result = [];
+			accessors.each(function() {
+				var accessor = $(this);
+				const fn = accessor.find('.node-input-accessor-value').typedInput('value');
+				result.push({ fn });
+			});
+			$('#node-input-accessors').val(JSON.stringify(result));
+		}
+	});
+</script>

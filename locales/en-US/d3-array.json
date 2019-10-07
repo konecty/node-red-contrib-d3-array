@@ -1,0 +1,17 @@
+{
+	"d3-array": {
+		"label": {
+			"title": "D3 array",
+			"function": "Function",
+			"property": "Property",
+			"accessors": "Accessors/Comparators"
+		},
+		"function": {
+			"group": "Group"
+		},
+		"errors": {
+			"invalid-data": "Input data is missing",
+			"error-processing": "Errors processing request: __message__"
+		}
+	}
+}
