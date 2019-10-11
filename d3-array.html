@@ -11,6 +11,12 @@
 		<label for="node-input-function"><i class="fa fa-random"></i> <span data-i18n="d3-array.label.function"></span></label>
 		<select id="node-input-function" style="width:70%;">
 				<option value="group" data-i18n="d3-array.function.group"></option>
+				<option value="bisect" data-i18n="d3-array.function.bisect"></option>
+				<option value="count" data-i18n="d3-array.function.count"></option>
+				<option value="merge" data-i18n="d3-array.function.merge"></option>
+				<option value="cross" data-i18n="d3-array.function.cross"></option>
+				<option value="shuffle" data-i18n="d3-array.function.shuffle"></option>
+				<option value="range" data-i18n="d3-array.function.range"></option>
 		</select>
 	</div>
 	<div class="form-row node-input-accessors-container-row">
@@ -29,7 +35,7 @@
 			property: { value: 'payload', required: true, validate: RED.validators.typedInput('propertyType') },
 			propertyType: { value: 'msg' },
 			function: { value: '', required: true },
-			accessors: { value: '[{ "fn": "" }]' }
+			accessors: { value: '[{ "fn": "", "t": "jsonata" }]' }
 		},
 		inputs: 1,
 		outputs: 1,
@@ -41,10 +47,9 @@
 			return this.name ? 'node_label_italic' : '';
 		},
 		oneditprepare: function() {
-			var node = this;
 			$('#node-input-property').typedInput({
-				default: this.propertyType || 'msg',
-				types: ['msg', 'flow', 'global', 'jsonata', 'env']
+				default: this.propertyType,
+				types: ['msg', 'flow', 'global', 'num', 'str', 'json']
 			});
 			$('#node-input-accessors-container')
 				.css('min-height', '250px')
@@ -53,9 +58,10 @@
 					addItem: function(container, i, opt) {
 						$('<input/>', { class: 'node-input-accessor-value', type: 'text', style: 'width: 100%;margin-left: 5px;' })
 							.appendTo(container)
-							.typedInput({ default: 'jsonata', types: ['jsonata'] });
+							.typedInput({ default: 'jsonata', types: ['msg', 'num', 'str', 'json', 'jsonata'] });
 						if (opt != null && opt.fn != null) {
 							$('.node-input-accessor-value', container).typedInput('value', opt.fn);
+							$('.node-input-accessor-value', container).typedInput('type', opt.t);
 						}
 					},
 					removeItem: function(opt) {},
@@ -71,12 +77,14 @@
 		},
 		oneditsave: function() {
 			var accessors = $('#node-input-accessors-container').editableList('items');
-			var node = this;
+			this.propertyType = $('#node-input-property').typedInput('type');
+
 			var result = [];
 			accessors.each(function() {
 				var accessor = $(this);
 				const fn = accessor.find('.node-input-accessor-value').typedInput('value');
-				result.push({ fn });
+				const t = accessor.find('.node-input-accessor-value').typedInput('type');
+				result.push({ fn, t });
 			});
 			$('#node-input-accessors').val(JSON.stringify(result));
 		}
