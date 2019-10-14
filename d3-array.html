@@ -10,17 +10,48 @@
 	<div class="form-row">
 		<label for="node-input-function"><i class="fa fa-random"></i> <span data-i18n="d3-array.label.function"></span></label>
 		<select id="node-input-function" style="width:70%;">
-				<option value="group" data-i18n="d3-array.function.group"></option>
-				<option value="bisect" data-i18n="d3-array.function.bisect"></option>
-				<option value="count" data-i18n="d3-array.function.count"></option>
-				<option value="merge" data-i18n="d3-array.function.merge"></option>
-				<option value="cross" data-i18n="d3-array.function.cross"></option>
-				<option value="shuffle" data-i18n="d3-array.function.shuffle"></option>
-				<option value="range" data-i18n="d3-array.function.range"></option>
+			<optgroup data-i18n="[label]d3-array.function.statistics.title">
+				<option value="min" data-i18n="d3-array.function.statistics.min"></option>
+				<option value="max" data-i18n="d3-array.function.statistics.max"></option>
+				<option value="minIndex" data-i18n="d3-array.function.statistics.minIndex"></option>
+				<option value="maxIndex" data-i18n="d3-array.function.statistics.maxIndex"></option>
+				<option value="extent" data-i18n="d3-array.function.statistics.extent"></option>
+				<option value="sum" data-i18n="d3-array.function.statistics.sum"></option>
+				<option value="mean" data-i18n="d3-array.function.statistics.mean"></option>
+				<option value="median" data-i18n="d3-array.function.statistics.median"></option>
+				<option value="quantile" data-i18n="d3-array.function.statistics.quantile"></option>
+				<option value="quantileSorted" data-i18n="d3-array.function.statistics.quantileSorted"></option>
+				<option value="variance" data-i18n="d3-array.function.statistics.variance"></option>
+				<option value="deviation" data-i18n="d3-array.function.statistics.deviation"></option>
+			</optgroup>
+			<optgroup data-i18n="[label]d3-array.function.search.title">
+				<option value="least" data-i18n="d3-array.function.search.least"></option>
+				<option value="greatest" data-i18n="d3-array.function.search.greatest"></option>
+				<option value="leastIndex" data-i18n="d3-array.function.search.leastIndex"></option>
+				<option value="greatestIndex" data-i18n="d3-array.function.search.greatestIndex"></option>
+				<option value="bisect" data-i18n="d3-array.function.search.bisect"></option>
+				<option value="quickSelect" data-i18n="d3-array.function.search.quickSelect"></option>
+				<option value="ascending" data-i18n="d3-array.function.search.ascending"></option>
+				<option value="descending" data-i18n="d3-array.function.search.descending"></option>
+			</optgroup>
+			<optgroup data-i18n="[label]d3-array.function.transformations.title">
+				<option value="group" data-i18n="d3-array.function.transformations.group"></option>
+				<option value="rollup" data-i18n="d3-array.function.transformations.rollup"></option>
+				<option value="count" data-i18n="d3-array.function.transformations.count"></option>
+				<option value="merge" data-i18n="d3-array.function.transformations.merge"></option>
+				<option value="pairs" data-i18n="d3-array.function.transformations.pairs"></option>
+				<option value="permute" data-i18n="d3-array.function.transformations.permute"></option>
+				<option value="shuffle" data-i18n="d3-array.function.transformations.shuffle"></option>
+				<option value="ticks" data-i18n="d3-array.function.transformations.ticks"></option>
+				<option value="tickIncrement" data-i18n="d3-array.function.transformations.tickIncrement"></option>
+				<option value="tickStep" data-i18n="d3-array.function.transformations.tickStep"></option>
+				<option value="range" data-i18n="d3-array.function.transformations.range"></option>
+				<option value="zip" data-i18n="d3-array.function.transformations.zip"></option>
+			</optgroup>
 		</select>
 	</div>
 	<div class="form-row node-input-accessors-container-row">
-		<label style="width:100%;" for="node-input-accessors-container"><i class="fa fa-cogs"></i> <span data-i18n="d3-array.label.accessors"></span></label>
+		<label style="width:100%;" for="node-input-accessors-container"><i class="fa fa-cogs"></i> <span data-i18n="d3-array.label.parameters"></span></label>
 		<ol id="node-input-accessors-container"></ol>
 		<input type="hidden" id="node-input-accessors"/>
 	</div>
