@@ -2,7 +2,7 @@ const d3 = require('d3-array');
 
 const mapToObject = map =>
 	Array.from(map).reduce(
-		(obj, [key, value]) => Object.assign(obj, { [key]: value instanceof Map ? mapToObject(value) : value }),
+		(obj, [key, value]) => Object.assign(obj, { [key]: value instanceof Map || value instanceof Set ? mapToObject(value) : value }),
 		{}
 	);
 module.exports = function(RED) {
@@ -23,33 +23,30 @@ module.exports = function(RED) {
 			};
 			const data = RED.util.evaluateNodeProperty(n.property, n.propertyType, this, msg);
 			const accessors = JSON.parse(n.accessors);
-			const accessorsFunctions = accessors.map(body => args => {
-				var expr = RED.util.prepareJSONataExpression(body.fn, node);
-				result = RED.util.evaluateJSONataExpression(expr, args);
-				return result;
-			});
-			switch (n.function) {
-				case 'group':
-					if (data) {
-						const payload = mapToObject(d3.group.apply(null, [data, ...accessorsFunctions]));
-						nodeSend({
-							...msg,
-							payload
-						});
-					} else {
-						nodeSend({
-							...msg,
-							payload: {}
-						});
+			const parameters = accessors.map(({ t : type, fn: value }) => {
+				if(type == null || type === 'jsonata') {
+					return (...args) => {
+						var expr = RED.util.prepareJSONataExpression(value, node);
+						result = RED.util.evaluateJSONataExpression(expr, { args });
+						return result;
 					}
-					nodeDone();
-					break;
+				}
+				return RED.util.evaluateNodeProperty(value, type, node, msg);
+			});
 
-				default:
-					node.error('Not implemented');
-					nodeDone();
-					break;
+			if (d3[n.function] == null) {
+				node.error(`Function [${n.function}] does not exists.`);
+				nodeSend(msg);
+				nodeDone();
+				return;
 			}
+
+			const payload = d3[n.function].apply(null, [data, ...parameters]);
+			nodeSend({
+				...msg,
+				payload: payload instanceof Map || payload instanceof Set ? mapToObject(payload) : payload
+			})
+			nodeDone();
 		});
 	}
 

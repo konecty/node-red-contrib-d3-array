@@ -7,7 +7,13 @@
 			"accessors": "Accessors/Comparators"
 		},
 		"function": {
-			"group": "Group"
+			"group": "Group",
+			"bisect": "Bisect",
+			"count": "Count",
+			"merge": "Merge",
+			"cross": "Cross",
+			"shuffle": "Shuffle",
+			"range": "Range"
 		},
 		"errors": {
 			"invalid-data": "Input data is missing",
