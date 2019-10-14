@@ -4,16 +4,50 @@
 			"title": "D3 array",
 			"function": "Function",
 			"property": "Property",
-			"accessors": "Accessors/Comparators"
+			"parameters": "Extra parameters"
 		},
 		"function": {
-			"group": "Group",
-			"bisect": "Bisect",
-			"count": "Count",
-			"merge": "Merge",
-			"cross": "Cross",
-			"shuffle": "Shuffle",
-			"range": "Range"
+			"statistics": {
+				"title": "Statistics",
+				"min": "Min",
+				"max": "Max",
+				"minIndex": "Min Index",
+				"maxIndex": "Max Index",
+				"extent": "Extent",
+				"sum": "Sum",
+				"mean": "Mean",
+				"median": "Median",
+				"quantile": "Quantile",
+				"quantileSorted": "Quantile Sorted",
+				"variance": "Variance",
+				"deviation": "Deviation"
+			},
+			"search": {
+				"title": "Search",
+				"least": "Least",
+				"greatest": "Greatest",
+				"leastIndex": "Least Index",
+				"greatestIndex": "Greatest Index",
+				"bisect": "Bisect",
+				"quickSelect": "Quick Select",
+				"ascending": "Ascending",
+				"descending": "Descending"
+			},
+			"transformations": {
+				"title": "Transformations",
+				"group": "Group",
+				"rollup": "Rollup",
+				"count": "Count",
+				"merge": "Merge",
+				"pairs": "Pairs",
+				"permute": "Permute",
+				"shuffle": "Shuffle",
+				"ticks": "Ticks",
+				"tickIncrement": "Tick Increment",
+				"tickStep": "Tick Step",
+				"range": "Range",
+				"zip": "Zip"
+			}
 		},
 		"errors": {
 			"invalid-data": "Input data is missing",
