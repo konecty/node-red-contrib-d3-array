@@ -1,29 +1,29 @@
 {
-  "name": "@konecty/node-red-contrib-d3-array",
-  "version": "0.0.1",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Konecty/node-red-contrib-d3-array.git"
-  },
-  "description": "Array manipulation, ordering, searching, summarizing, etc using d3-array for node-red",
-  "license": "MIT",
-  "keywords": [],
-  "author": "Konecty Business Platform <dev@konecty.com>",
-  "node-red": {
-    "nodes": {
-      "d3-array": "d3-array.js"
-    }
-  },
-  "dependencies": {
-    "d3-array": "^2.3.2"
-  },
-  "bugs": {
-    "url": "https://github.com/Konecty/node-red-contrib-d3-array/issues"
-  },
-  "homepage": "https://github.com/Konecty/node-red-contrib-d3-array#readme",
-  "main": "d3-array.js",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+	"name": "@konecty/node-red-contrib-d3-array",
+	"version": "0.1.0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Konecty/node-red-contrib-d3-array.git"
+	},
+	"description": "Array manipulation, ordering, searching, summarizing, etc using d3-array for node-red",
+	"license": "MIT",
+	"keywords": [],
+	"author": "Konecty Business Platform <dev@konecty.com>",
+	"node-red": {
+		"nodes": {
+			"d3-array": "d3-array.js"
+		}
+	},
+	"dependencies": {
+		"d3-array": "^2.3.2"
+	},
+	"bugs": {
+		"url": "https://github.com/Konecty/node-red-contrib-d3-array/issues"
+	},
+	"homepage": "https://github.com/Konecty/node-red-contrib-d3-array#readme",
+	"main": "d3-array.js",
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
 }
