@@ -23,13 +23,13 @@ module.exports = function(RED) {
 			};
 			const data = RED.util.evaluateNodeProperty(n.property, n.propertyType, this, msg);
 			const accessors = JSON.parse(n.accessors);
-			const parameters = accessors.map(({ t : type, fn: value }) => {
-				if(type == null || type === 'jsonata') {
-					return (...args) => {
+			const parameters = accessors.map(({ t: type, fn: value }) => {
+				if (type == null || type === 'jsonata') {
+					return args => {
 						var expr = RED.util.prepareJSONataExpression(value, node);
-						result = RED.util.evaluateJSONataExpression(expr, { args });
+						result = RED.util.evaluateJSONataExpression(expr, args);
 						return result;
-					}
+					};
 				}
 				return RED.util.evaluateNodeProperty(value, type, node, msg);
 			});
@@ -45,7 +45,7 @@ module.exports = function(RED) {
 			nodeSend({
 				...msg,
 				payload: payload instanceof Map || payload instanceof Set ? mapToObject(payload) : payload
-			})
+			});
 			nodeDone();
 		});
 	}
